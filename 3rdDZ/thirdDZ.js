@@ -11,7 +11,7 @@ const operation1 = userName !== undefined && userAge > 18;
 console.log(operation1);
 
 // Операцию, которая вернёт false, если роль пользователя НЕ "Admin" ИЛИ род деятельности НЕ "CEO".
-const operation2 = userRole !== "Admin" || userOccupation !== "CEO";
+const operation2 = userRole === "Admin" || userOccupation === "CEO";
 console.log(operation2);
 
 // Операцию, которая вернёт род деятельности пользователя, если он определён. Если нет - роль.
