@@ -48,37 +48,37 @@ const copiedInitialData = initialTableData.reduce((resultArray, elem, index) => 
     return resultArray;
 }, []);
 
-let sortDirection = "none";
-let columnNumber = 0; 
+let sortDirections = ["none", "none", "none"];
+let columnNumber = 0;
 
 function sortTable(columnIndex) {
 
     removeTable();
 
     if (columnIndex !== columnNumber) {
-        sortDirection = "none";
+        sortDirections[columnIndex -1] = "none";
     }
 
     columnNumber = columnIndex;
 
-        if (sortDirection === "none") {
+        if (sortDirections[columnIndex -1] === "none") {
 
-            sortAscending(copiedInitialData, columnIndex);
+            sortData(copiedInitialData, columnIndex);
             createTable(copiedInitialData);
             placeMarker(columnIndex);
-            sortDirection = "sorted ascending";
+            sortDirections[columnIndex -1] = "sorted ascending";
             return;
 
-        } else if (sortDirection === "sorted ascending") {
+        } else if (sortDirections[columnIndex -1] === "sorted ascending") {
 
-            sortDescending(copiedInitialData, columnIndex);
+            sortData(copiedInitialData, columnIndex);
             createTable(copiedInitialData);
             placeMarker(columnIndex);
-            sortDirection = "sorted descending";
+            sortDirections[columnIndex -1] = "sorted descending";
             return;
 
-        } else if (sortDirection === "sorted descending") {
-            sortDirection = "none";
+        } else if (sortDirections[columnIndex -1] === "sorted descending") {
+            sortDirections[columnIndex -1] = "none";
             columnNumber = 0;
             createTable(initialTableData);
         }
@@ -89,14 +89,15 @@ function removeTable() {
     return tableElem.remove();
 }
 
-function sortAscending(array, columnIndex) {
+function sortData(array, columnIndex) {
     const elemIndex = columnIndex - 1;
-    return array.sort((innerArray1, innerArray2) => innerArray1[elemIndex] < innerArray2[elemIndex] ? -1 : 1)
-}
 
-function sortDescending(array, columnIndex) {
-    const elemIndex = columnIndex - 1;
-    return array.sort((innerArray1, innerArray2) => innerArray1[elemIndex] > innerArray2[elemIndex] ? -1 : 1)
+    if (sortDirections[elemIndex] === "none") {
+        return array.sort((innerArray1, innerArray2) => innerArray1[elemIndex] < innerArray2[elemIndex] ? -1 : 1);
+
+    } else if (sortDirections[elemIndex] === "sorted ascending") {
+        return array.sort((innerArray1, innerArray2) => innerArray1[elemIndex] > innerArray2[elemIndex] ? -1 : 1);
+    }
 }
 
 function placeMarker(columnIndex) {
@@ -108,9 +109,10 @@ function placeMarker(columnIndex) {
         }
     }
 
-    if (sortDirection === "none") {
+    if (sortDirections[columnIndex -1] === "none") {
         return headerToMark.classList.toggle("sorted-ascending");
-    } else if (sortDirection === "sorted ascending") {
+
+    } else if (sortDirections[columnIndex -1] === "sorted ascending") {
         return headerToMark.classList.toggle("sorted-descending");
     }
 }
