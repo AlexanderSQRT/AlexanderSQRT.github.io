@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24thDZ</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    .container {
+        width: 25%;
+        height: 100%;
+        margin: 0 auto;
+        margin-top: 150px;
+    }
+    .timer-header {
+        display: flex;
+    }
+    .timer {
+        display: flex;
+    }
+    .seconds-input {
+        padding-left: 5px;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <div class="timer-header">
+            <div class="minutes-input">
+                <div class="title">Minutes</div>
+                <input type="number" placeholder="00" class="minutes">
+            </div>
+            <div class="seconds-input">
+                <div class="title">Seconds</div>
+                <input type="number" placeholder="00" class="seconds">
+            </div>
+        </div>
+
+        <div class="timer">
+            <div class="timer-block">
+                <div class="time minutes">00</div>
+            </div>
+            <div class="timer-block">
+                <div class="time separator">:</div>
+            </div>
+            <div class="timer-block">
+                <div class="time seconds">00</div>
+            </div>
+        </div>
+        <button class="button-start">Start</button>
+        <button class="newCount">Start new countdown</button>
+
+        <div class="countOverMessage" style="padding-top: 50px; display: none;">Time has runned out!</div>
+    </div>
+
+    <script src="24.js"></script>
+</body>
+</html>
