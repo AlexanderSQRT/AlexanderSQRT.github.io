@@ -1,1 +1,0 @@
-# AlexanderSQRT.github.io

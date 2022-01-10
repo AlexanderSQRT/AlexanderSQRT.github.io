@@ -18,29 +18,18 @@ createTable(initialTableData);
 
 function createTable(arrayWIthData) {
 
-    const bodyElem = document.querySelector("body");
-    const tableElem = document.createElement("table");
+    const tbodyElem = document.querySelector("tbody");
 
-    const tableHeader = document.createElement("tr");
-    tableHeader.innerHTML = `<th>Country</th>
-                            <th>Capital City</th>
-                            <th>Continent</th>`;
-
-    tableElem.prepend(tableHeader);
-
-    for (let elem of arrayWIthData) {
-        const newTrElem = document.createElement("tr");
-
-        for (let value of elem) {
-            const newTdElem = document.createElement("td");
-            newTdElem.innerHTML = value;
-            newTrElem.append(newTdElem);
-        }
-        tableElem.append(newTrElem);
-    }
-    bodyElem.prepend(tableElem);
-    return;
-
+    const arrayToInsert = arrayWIthData
+                                .map((elem) => {
+                                    const tempContent = elem.map((value) => `<td>${value}</td>`)
+                                    .join('');
+                                    return `<tr>${tempContent}</tr>`;
+                                }
+                                )
+                                .join('');
+                                
+    tbodyElem.innerHTML = arrayToInsert;
 }
 
 const copiedInitialData = initialTableData.reduce((resultArray, elem, index) => {
@@ -52,8 +41,6 @@ let sortDirections = ["none", "none", "none"];
 let columnNumber = 0;
 
 function sortTable(columnIndex) {
-
-    removeTable();
 
     if (columnIndex !== columnNumber) {
         sortDirections[columnIndex -1] = "none";
